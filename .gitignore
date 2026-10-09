@@ -1,0 +1,7 @@
+i# Runtime logs
+logs/*.log
+
+# Secrets and private keys
+.env
+*.pem
+*.key

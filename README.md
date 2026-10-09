@@ -1,0 +1,165 @@
+# Assignment 1 — Linux, Bash & Networking
+
+## Description
+
+This project is a Linux diagnostic toolkit written in Bash. It collects system information, checks disk usage against a specified threshold, and performs basic network checks.
+
+## Requirements
+
+The scripts are designed to run in a Linux environment.
+
+The following commands/utilities are used:
+
+* Bash
+* hostname
+* whoami
+* date
+* uname
+* uptime
+* lscpu
+* free
+* df
+* getent
+* ping
+* ip
+* timeout
+
+## Installation / Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/excelochuko/Assignment1.git
+cd Assignment1
+```
+
+Make the scripts executable:
+
+```bash
+chmod +x *.sh
+```
+
+## Usage
+
+### System Information
+
+Run:
+
+```bash
+./system-info.sh
+```
+
+The script displays:
+
+* Hostname
+* Current user
+* Date and time
+* Operating system
+* Kernel version
+* Uptime
+* CPU information
+* Memory information
+* Current working directory
+
+### Disk Check
+
+Run:
+
+```bash
+./disk-check.sh <threshold> [path]
+```
+
+The default path is `/`.
+
+Example:
+
+```bash
+./disk-check.sh 80
+```
+
+Or:
+
+```bash
+./disk-check.sh 80 /home
+```
+
+Exit codes:
+
+* `0` — disk usage is below the threshold
+* `1` — disk usage has reached or exceeded the threshold
+* `2` — invalid input
+
+The threshold must be an integer from 1 to 100.
+
+### Network Check
+
+Run:
+
+```bash
+./network-check.sh <hostname-or-ip> [port]
+```
+
+Example:
+
+```bash
+./network-check.sh google.com
+```
+
+With a TCP port:
+
+```bash
+./network-check.sh google.com 443
+```
+
+The script:
+
+* Validates the host argument
+* Resolves the hostname/address
+* Performs a basic connectivity check
+* Displays network interface information
+* Checks TCP connectivity when a port is supplied
+
+Valid ports are from 1 to 65535.
+
+## Testing
+
+Run Bash syntax checks:
+
+```bash
+bash -n system-info.sh
+bash -n disk-check.sh
+bash -n network-check.sh
+```
+
+Run the scripts manually:
+
+```bash
+./system-info.sh
+./disk-check.sh 80
+./network-check.sh google.com
+./network-check.sh google.com 443
+```
+
+If the provided grading script is available in the repository, run:
+
+```bash
+chmod +x grade.sh *.sh
+./grade.sh
+```
+
+## Logging
+
+Useful logs are stored under the `logs/` directory. The directory is retained in Git using `.gitkeep`.
+
+## Assumptions
+
+* The scripts are intended to run on Linux.
+* Required standard Linux utilities are available.
+* Network connectivity may be unavailable or ICMP/ping may be blocked; the network script reports such conditions without crashing.
+* No passwords, tokens, private keys, or other secrets are required.
+* The scripts do not depend on hardcoded machine-specific paths.
+
+## Git Workflow
+
+The project uses meaningful Git commits and includes a feature branch merged into the main branch as required by the assignment.
+
